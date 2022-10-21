@@ -6,5 +6,5 @@ public class SceneSettings : MonoBehaviour
 {
     [SerializeField] public Camera camera;
     [SerializeField] public Transform cameraTransform;
-
+    [SerializeField] public Vector3 cameraOffset;
 }
