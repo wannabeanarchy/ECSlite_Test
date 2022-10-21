@@ -15,7 +15,7 @@ namespace EcsLiteTest.System
 
         public void Run(IEcsSystems systems)
         {
-            var filter = systems.GetWorld().Filter<DoorButton>().Inc<TargetCoordinate>().End();
+            var filter = systems.GetWorld().Filter<DoorButton>().End();
 
             var doorButtonPool = systems.GetWorld().GetPool<DoorButton>();
 
@@ -31,13 +31,22 @@ namespace EcsLiteTest.System
                 {
                     ref var doorButtonComponent = ref doorButtonPool.Get(entity);
                     ref var player = ref playerPool.Get(entityPlayer);
-                     
+
+                    if (doorButtonComponent.opened)
+                        continue;
+
+                    if (gameMain.listDoorButtons[doorButtonComponent.index].DoorCurrentPosition() == doorButtonComponent.openedPosition)
+                    { 
+                        doorButtonComponent.opened = true;
+                        continue;
+                    }
+
                     if (Vector3.Distance(player.position, doorButtonComponent.buttonPosition) < radiusActivate)
                     {
                         gameMain.listDoorButtons[doorButtonComponent.index].OpenDoor(); 
                     }
                 }
-            }
+            } 
         }
     }
 }

@@ -21,15 +21,14 @@ namespace EcsLiteTest.System
                 var doorAndButtonEntity = ecsWorld.NewEntity();
 
                 ecsWorld.GetPool<DoorButton>()
-                    .Add(doorAndButtonEntity);
-
-                ecsWorld.GetPool<TargetCoordinate>()
-                    .Add(doorAndButtonEntity);
+                    .Add(doorAndButtonEntity); 
 
                 ref var doorButton = ref ecsWorld.GetPool<DoorButton>().Get(doorAndButtonEntity);
 
                 doorButton.buttonPosition = door.button.position;
+                doorButton.openedPosition = door.openOffset;
                 doorButton.index = gameMain.listDoorButtons.IndexOf(door);
+                doorButton.opened = false;
             } 
         }
     }

@@ -14,6 +14,11 @@ namespace EcsLiteTest.Unity
         public Vector3 openOffset;
         public float openSpeed;
 
+        public Vector3 DoorCurrentPosition()
+        {
+            return door.localPosition;
+        }
+
         public void OpenDoor()
         {
             float distance = Vector3.Distance(door.localPosition, openOffset);
