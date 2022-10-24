@@ -11,6 +11,7 @@ namespace EcsLiteTest.System
     public class Move : IEcsRunSystem
     {
         [Inject] private IGameMain gameMain;
+        private float distance_offset = 0.1f;
 
         public void Run(IEcsSystems systems)
         {
@@ -28,7 +29,7 @@ namespace EcsLiteTest.System
                 if (_coordinate.targetPoint == Vector3.zero)
                     continue;
 
-                if (_coordinate.targetPoint == gameMain.PlayerPosition())
+                if (Vector3.Distance(_coordinate.targetPoint, _player.position) <= distance_offset)
                 {
                     if (_player.moving)
                     {
